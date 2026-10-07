@@ -1,8 +1,4 @@
-// ===============================
-// Simulador de Tienda con control de stock
-// ===============================
 
-// --- Variables constantes (no cambian su referencia) ---
 const IVA = 0.21;
 const LIMITE_DESCUENTO_ALTO = 100000;
 const LIMITE_DESCUENTO_BAJO = 50000;
@@ -14,11 +10,11 @@ const productos = [
     { id: 4, nombre: "Auriculares", precio: 30000, stock: 4 },
 ];
 
-// --- Variables que cambian durante la ejecución ---
+
 let carrito = [];
 let total = 0;
 
-// --- Funciones ---
+
 
 function armarCatalogo() {
     let texto = "CATÁLOGO DISPONIBLE\n\n";
@@ -31,7 +27,7 @@ function armarCatalogo() {
 function agregarProducto() {
     const idIngresado = prompt(armarCatalogo() + "\nIngresá el número del producto:");
 
-    // Si el usuario cancela el prompt, volvemos al menú
+  
     if (idIngresado === null) {
         return;
     }
@@ -58,7 +54,7 @@ function agregarProducto() {
 
     const cantidad = Number(cantidadIngresada);
 
-    // Validación de la cantidad con if / else if / else
+   
     if (isNaN(cantidad) || cantidad <= 0 || !Number.isInteger(cantidad)) {
         alert("Cantidad inválida. Ingresá un número entero mayor a 0.");
     } else if (cantidad > producto.stock) {
@@ -101,7 +97,7 @@ function finalizarCompra() {
         return false;
     }
 
-    // Descuento según el monto de la compra
+    
     let descuento = 0;
     if (total >= LIMITE_DESCUENTO_ALTO) {
         descuento = 0.1;
@@ -128,7 +124,7 @@ function finalizarCompra() {
     return true;
 }
 
-// --- Función principal: bucle del menú ---
+
 function iniciarSimulador() {
     let opcion = "";
     let continuar = true;
@@ -143,12 +139,12 @@ function iniciarSimulador() {
             "Elegí una opción:"
         );
 
-        // Si el usuario cancela, se trata como salir
+        
         if (opcion === null) {
             opcion = "0";
         }
 
-        // El menú tiene varias ramas, por eso usamos switch
+        
         switch (opcion) {
             case "1":
                 agregarProducto();
@@ -174,10 +170,9 @@ function iniciarSimulador() {
     console.log("Simulador finalizado.");
 }
 
-// --- Inicio: el botón del HTML dispara el simulador ---
+
 const botonIniciar = document.getElementById("btnIniciar");
 botonIniciar.addEventListener("click", () => {
-    // Reiniciamos el carrito por si se ejecuta más de una vez
     carrito = [];
     total = 0;
     iniciarSimulador();
